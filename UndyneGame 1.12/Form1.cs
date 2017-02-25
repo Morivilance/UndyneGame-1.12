@@ -39,9 +39,9 @@ namespace UndyneGame_1._12
         private int _y3;
         private int _x4;
         private int _y4;
-        private int Health = 100;
+        private double Health = 300;
         private int Score = 0;
-        Random rnd = new Random();
+        private Random rnd = new Random();
         public Form1()
         {
             _x1 = 425;
@@ -146,11 +146,11 @@ namespace UndyneGame_1._12
             drawScore(Score / 100000 % 10, 292, 10, e);
 
             e.Graphics.FillRectangle(Brushes.DarkBlue, _x1, _y1, 10, 1);
-           // e.Graphics.FillRectangle(Brushes.DarkBlue, _x2, _y2, 10, 1);
-           // e.Graphics.FillRectangle(Brushes.DarkBlue, _x3, _y3, 10, 1);
-          //  e.Graphics.FillRectangle(Brushes.DarkBlue, _x4, _y4, 10, 1);
-
-            e.Graphics.FillRectangle(Brushes.Red, 45, 235, Health*3, 3);
+            e.Graphics.FillRectangle(Brushes.DarkBlue, _x2, _y2, 10, 1);
+            e.Graphics.FillRectangle(Brushes.DarkBlue, _x3, _y3, 1, 10);
+            e.Graphics.FillRectangle(Brushes.DarkBlue, _x4, _y4, 1, 10);
+           int health = Convert.ToInt32(Health);
+            e.Graphics.FillRectangle(Brushes.Red, 45, 235, health , 3);
             e.Graphics.FillRectangle(Brushes.Red,195,125, 5, 5);
 
             if (BladePos == Position.Left)
@@ -193,74 +193,76 @@ namespace UndyneGame_1._12
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-         if (Health == 0)
+            Health += 0.1;
+
+            if (Health == 0)
          {
                 Application.Exit();
          }
 
             if (SpearFrom1 == From.Right)
             {
-                _x1 -= 3;
-                if (_x1 <= 218 && BladePos != Position.Right)
+                _x1 -= 1;
+                if (_x1 <= 220 && BladePos != Position.Right)
                 {
                     
                     Health -= 10;
-                    _x1 = 424;
-                }else if (_x1 <= 218 && BladePos == Position.Right)
+                    _x1 = rnd.Next(434, 450);
+                }else if (_x1 <= 220 && BladePos == Position.Right)
                 {
                     Score += 1;
-                     _x1 = 424;
+                    _x1 = rnd.Next(434, 450);
                 }
 
 
             }
             if (SpearFrom2 == From.Left)
             {
-              //  _x2 += 3;
-                if (_x2 >= 175 && BladePos != Position.Left)
+                _x2 += 1;
+                if (_x2 >= 170 && BladePos != Position.Left)
                 {
 
                     Health -= 10;
-                    _x2 = rnd.Next(-20, 0);
+                    _x2 = rnd.Next(-40, 0);
                 }
-                else if (_x2 >= 175 && BladePos == Position.Left)
+                else if (_x2 >= 170 && BladePos == Position.Left)
                 {
                     Score += 1;
-                   // _x2 = rnd
+                    _x2 = rnd.Next(-40, 0);
                 }
 
 
             }
             if (SpearFrom3 == From.Up)
             {
-            //    _y3 -= 3;
-                if (_y3 >= 105 && BladePos != Position.Up)
+                _y3 += 1;
+                if (_y3 >= 100 && BladePos != Position.Up)
                 {
 
                     Health -= 10;
-                    _y3 = 0;
+                    _y3 = rnd.Next(-40, 0);
                 }
-                else if (_y3 >= 105 && BladePos == Position.Up)
+                else if (_y3 >= 100 && BladePos == Position.Up)
                 {
                     Score += 1;
-                    _y3 = 0;
+                    _y3 = rnd.Next(-40, 0);
                 }
 
 
             }
             if (SpearFrom4 == From.Down)
             {
-            //    _y4 += 3;
-                if (_y4 <= 145 && BladePos != Position.Down)
+               _y4 -= 1;
+                if (_y4 <= 150 && BladePos != Position.Down)
                 {
 
                     Health -= 10;
-                    _y4 = 300;
+                    _y4 = rnd.Next(300, 340);
                 }
-                else if (_y4 <= 145 && BladePos == Position.Down)
+                else if (_y4 <= 150 && BladePos == Position.Down)
                 {
                     Score += 1;
-                    _y4 = 300;
+                    _y4 = rnd.Next(300, 340);
                 }
 
 
